@@ -37,6 +37,7 @@ class WelcomeController extends GetxController{
     super.onReady();
     Get.changeThemeMode(ThemeMode.dark);
     startVersionDisplayAndCheckTask();
+    connect();
   }
 
   /// 在 [onDelete] 方法之前调用。

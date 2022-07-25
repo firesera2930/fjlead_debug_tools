@@ -19,7 +19,7 @@ dependencies:
   # 设备信息
   device_info_plus: 3.2.3
   # getx 状态管理
-  get: 4.6.1
+  get: 4.6.5
 
 
 dev_dependencies:

@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text('切换'),
                       onPressed: (){
                         Get.isDarkMode ? Get.changeThemeMode(ThemeMode.light) : Get.changeThemeMode(ThemeMode.dark);
+                        setState(() {});
                       },
                     ),
                   )

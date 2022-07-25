@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class ThemeController extends GetxController{
 
-  ThemeMode themeMode = ThemeMode.system;
+  final themeMode = ThemeMode.system.obs;
 
   ThemeController();
 
@@ -31,8 +31,11 @@ class ThemeController extends GetxController{
     super.dispose();
   }
 
+  /// 切换主题
   void onChangeMode(ThemeMode mode){
-    
+    themeMode(mode);
   }
+
+  
 
 }
