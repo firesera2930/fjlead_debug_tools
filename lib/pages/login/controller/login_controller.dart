@@ -1,6 +1,9 @@
-import 'package:get/get.dart';
+part of login;
 
 class LoginController extends GetxController{
+
+  final connectivityResult = ConnectivityResult.none.obs;
+
   LoginController();
 
   /// 在 widget 内存中分配后立即调用。
@@ -13,6 +16,7 @@ class LoginController extends GetxController{
   @override
   void onReady() {
     super.onReady();
+    initConnectivity();
   }
 
   /// 在 [onDelete] 方法之前调用。
@@ -25,5 +29,12 @@ class LoginController extends GetxController{
   @override
   void dispose() {
     super.dispose();
+  }
+
+  /// 初始化连接状态获取
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = await Connectivity().checkConnectivity();
+    connectivityResult(result);
+    update();
   }
 }

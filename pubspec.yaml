@@ -20,6 +20,14 @@ dependencies:
   device_info_plus: 3.2.3
   # getx 状态管理
   get: 4.6.5
+  # 跳转设置
+  app_settings: 4.1.8
+  # 提示框
+  bmprogresshud: 1.0.1
+  
+  hex: 0.2.0
+  # 缓存数据
+  shared_preferences: 2.0.15
 
 
 dev_dependencies:
