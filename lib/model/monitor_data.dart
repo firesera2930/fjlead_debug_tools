@@ -2,23 +2,49 @@ import 'package:debug_tools_wifi/model/register.dart';
 
 class MonitorData{
 
+  List<RegisterData> basicData = [];
+  List<RegisterData> monitorOne = [];
+  List<RegisterData> monitorTwo = [];
+  List<RegisterData> monitorThree = [];
+  List<RegisterData> monitorFour = [];
+  List<RegisterData> monitorFive = [];
+  List<RegisterData> monitorSix = [];
+  List<RegisterData> tailData = [];
   List<RegisterData> data = [];
 
   MonitorData({
-    this.data = const <RegisterData>[]
+    this.basicData = const <RegisterData>[],
+    this.monitorOne = const <RegisterData>[],
+    this.monitorTwo = const <RegisterData>[],
+    this.monitorThree = const <RegisterData>[],
+    this.monitorFour = const <RegisterData>[],
+    this.monitorFive = const <RegisterData>[],
+    this.monitorSix = const <RegisterData>[],
+    this.tailData = const <RegisterData>[],
+    this.data = const <RegisterData>[],
   });
 
   MonitorData get getData {
     List<RegisterData> list = [];
-    list.addAll(basicData);
-    list.addAll(monitorOne);
-    list.addAll(monitorTwo);
-    list.addAll(monitorThree);
-    list.addAll(monitorFour);
-    list.addAll(monitorFive);
-    list.addAll(monitorSix);
-    list.addAll(tailData);
-    return MonitorData(data:list);
+    list.addAll(_basicData);
+    list.addAll(_monitorOne);
+    list.addAll(_monitorTwo);
+    list.addAll(_monitorThree);
+    list.addAll(_monitorFour);
+    list.addAll(_monitorFive);
+    list.addAll(_monitorSix);
+    list.addAll(_tailData);
+    return MonitorData(
+      basicData: _basicData,
+      monitorOne: _monitorOne,
+      monitorTwo: _monitorTwo,
+      monitorThree: _monitorThree,
+      monitorFour: _monitorFour,
+      monitorFive: _monitorFive,
+      monitorSix: _monitorSix,
+      tailData: _tailData,
+      data: list
+    );
   } 
   
   MonitorData parseData(MonitorData monitorData, List<int> data){
@@ -50,9 +76,29 @@ class MonitorData{
 
 }
 
+/// 监测类型
+enum MonitorType{
+  dischargeGate,      // 0 泄流闸
+  dischargePipe,      // 1 泄流管道
+  dischargeChannel,   // 2 泄流明渠
+  generatorPower,     // 3 发电机功率
+  measuringWeir,      // 4 量水堰
+  drainHole           // 5 泄水孔
+}
+
+/// 监测类型
+Map<int, String> monitorType = {
+  0: '泄流闸',
+  1: '泄流管道',
+  2: '泄流明渠',
+  3: '发电机功率',
+  4: '量水堰',
+  5: '泄水孔'
+};
+
 
 /// 基础信息
-List<RegisterData> basicData = [
+List<RegisterData> _basicData = [
   RegisterData(
     registerAddress: 0x0000,
     content: '监测点数量',
@@ -80,7 +126,7 @@ List<RegisterData> basicData = [
 ];
 
 /// 监测点一
-List<RegisterData> monitorOne = [
+List<RegisterData> _monitorOne = [
   RegisterData(
     registerAddress: 0x0006,
     content: '监测点1监测类型',
@@ -132,7 +178,7 @@ List<RegisterData> monitorOne = [
 ];
 
 /// 监测点二
-List<RegisterData> monitorTwo = [
+List<RegisterData> _monitorTwo = [
   RegisterData(
     registerAddress: 0x0012,
     content: '监测点2监测类型',
@@ -184,7 +230,7 @@ List<RegisterData> monitorTwo = [
 ];
 
 /// 监测点三
-List<RegisterData> monitorThree = [
+List<RegisterData> _monitorThree = [
   RegisterData(
     registerAddress: 0x001E,
     content: '监测点3监测类型',
@@ -236,7 +282,7 @@ List<RegisterData> monitorThree = [
 ];
 
 /// 监测点四
-List<RegisterData> monitorFour = [
+List<RegisterData> _monitorFour = [
   RegisterData(
     registerAddress: 0x002A,
     content: '监测点4监测类型',
@@ -288,7 +334,7 @@ List<RegisterData> monitorFour = [
 ];
 
 /// 监测点五
-List<RegisterData> monitorFive = [
+List<RegisterData> _monitorFive = [
   RegisterData(
     registerAddress: 0x0036,
     content: '监测点5监测类型',
@@ -340,7 +386,7 @@ List<RegisterData> monitorFive = [
 ];
 
 /// 监测点六
-List<RegisterData> monitorSix = [
+List<RegisterData> _monitorSix = [
   RegisterData(
     registerAddress: 0x0042,
     content: '监测点6监测类型',
@@ -392,7 +438,7 @@ List<RegisterData> monitorSix = [
 ];
 
 /// 尾信息
-List<RegisterData> tailData = [
+List<RegisterData> _tailData = [
   RegisterData(
     registerAddress: 0x004E,
     content: '终端软件版本号',

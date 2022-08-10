@@ -1,3 +1,4 @@
+import 'package:debug_tools_wifi/pages/report/page/report_root_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class _WorkbenchPageState extends State<WorkbenchPage> {
                   functionItem(
                     icon: Icon(Icons.data_thresholding, size: 36),
                     text: '实时监测数据',
-                    nextPage: Container()
+                    nextPage: ReportRootPage()
                   )
                 ],
               )
@@ -54,7 +55,7 @@ class _WorkbenchPageState extends State<WorkbenchPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(height: 10),
-            Text('工作台',style: TextStyle(color: Colors.white,fontSize: 32),),
+            Text('工作台',style: TextStyle(fontSize: 32),),
             Container(height: 10),
             Divider(height: 1, color: Colors.white70,),
             Container(height: 10),
@@ -72,7 +73,7 @@ class _WorkbenchPageState extends State<WorkbenchPage> {
       
     return InkWell(
       onTap: (){
-        Get.to(() => MonitorPage());
+        Get.to(() => nextPage);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),

@@ -1,5 +1,6 @@
 import 'package:debug_tools_wifi/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 /// 我的页面
@@ -83,7 +84,7 @@ class _MinePageState extends State<MinePage> {
   }){
     return InkWell(
       onTap: (){
-        
+        Get.to(() => nextPage);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),

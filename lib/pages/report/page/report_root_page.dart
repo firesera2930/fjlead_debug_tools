@@ -1,25 +1,28 @@
-import 'package:debug_tools_wifi/components/socket/logs_cache.dart';
+import 'package:debug_tools_wifi/components/event_bird.dart';
 import 'package:debug_tools_wifi/pages/mine/page/mine_page.dart';
+import 'package:debug_tools_wifi/pages/monitor/page/monitor_page.dart';
+import 'package:debug_tools_wifi/pages/report/page/report_page.dart';
 import 'package:debug_tools_wifi/pages/workbench/page/workbench_page.dart';
 import 'package:debug_tools_wifi/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-/// 首页导航区
-class RootPage extends StatefulWidget {
+/// 导航区
+class ReportRootPage extends StatefulWidget {
   @override
-  _RootPageState createState() => _RootPageState();
+  _ReportRootPageState createState() => _ReportRootPageState();
 }
 
-class _RootPageState extends State<RootPage> with TickerProviderStateMixin {
+class _ReportRootPageState extends State<ReportRootPage> with TickerProviderStateMixin {
   
   int _currentIndex = 0;
+  List<Widget> pages = [];
 
   @override
   void initState() {
     super.initState();
-    initLogs();
+    loadPages();
   }
 
   @override
@@ -27,17 +30,15 @@ class _RootPageState extends State<RootPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void initLogs() async {
-    await LogsCache.getInstance().initLogs();
+  void loadPages(){
+    pages = [
+      /// 工作台
+      MonitorPage(),
+      /// 我的
+      ReportPage()
+    ];
   }
-
-  /// 
-  List<Widget> pages = [
-    /// 工作台
-    WorkbenchPage(),
-    /// 我的
-    MinePage()
-  ];
+  
 
   
 
@@ -65,33 +66,34 @@ class _RootPageState extends State<RootPage> with TickerProviderStateMixin {
             unselectedItemColor: colorScheme.onSecondary.withOpacity(0.7),
             items: [
               BottomNavigationBarItem(
-                label: '工作台',
+                label: '数据调试',
                 icon: SizedBox(
                   height: 24,
                   width: 24,
                   child: _currentIndex == 0 ?  
-                  Icon(Icons.widgets) :
-                  Icon(Icons.widgets_outlined)
+                  Icon(Icons.router) :
+                  Icon(Icons.router_outlined)
                 ),
               ),
 
               BottomNavigationBarItem(
-                label: '我的',
+                label: '报文记录',
                 icon: SizedBox(
                   height: 24,
                   width: 24,
                   child: _currentIndex == 1 ?  
-                  Icon(Icons.person):
-                  Icon(Icons.person_outline)
+                  Icon(Icons.insert_comment):
+                  Icon(Icons.insert_comment_outlined)
                 ),
               ),
 
             ],
             currentIndex: _currentIndex,
             onTap: (int i) {
-              setState(() {
-                _currentIndex = i;
-              });
+              
+              _currentIndex = i;
+              eventBird.emit('freshReport');
+              setState(() {});
             },
           );
         }

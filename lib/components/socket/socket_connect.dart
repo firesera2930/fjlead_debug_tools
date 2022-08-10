@@ -1,7 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:debug_tools_wifi/app/app_config.dart';
+import 'package:debug_tools_wifi/components/byte_tool.dart';
+import 'package:debug_tools_wifi/components/socket/logs_cache.dart';
+import 'package:debug_tools_wifi/model/logs_data.dart';
+import 'package:debug_tools_wifi/model/message_parse.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hex/hex.dart';
@@ -16,22 +19,21 @@ class SocketConnect {
   bool isConnect = false;
   List<int> rd=[];
   String readTime = '';
-  List<Map> debugLogs = [];
-  List<String> logList = [];
 
-  bool isDebugPage = false;
 
   SocketConnect();
 
   /// 连接
-  Future<void> onTapConnect({String? host, int? port}) async {
+  Future<void> onTapConnect({String? host, int? port, Function()? onFinish }) async {
     String currentIP = host ?? AppConfig.getInstance().baseIP;
     int currentPort = port ?? AppConfig.getInstance().basePort;
+    
     await _socket?.close();
     try {
       _socket = await RawSocket.connect(currentIP, currentPort, timeout: Duration(seconds:1));
       isConnect = true;
       debugPrint('✅ Socket连接成功!');
+      onFinish!();
     } catch (e) {
       isConnect = false;
       if(e is SocketException){
@@ -39,6 +41,7 @@ class SocketConnect {
         debugPrint(os.message);
       }
       debugPrint(e.toString());
+      onFinish!();
     }
   }
 
@@ -48,7 +51,7 @@ class SocketConnect {
   }
 
   /// 数据监听
-  void lisenData({required Function(List<int>) onRead})async{
+  void lisenData({required Function(List<int>) onRead, required Function(bool) connectState})async{
     _socket?.listen((event)async { 
          //订阅的消息
       if(event == RawSocketEvent.read) {
@@ -58,54 +61,72 @@ class SocketConnect {
           debugPrint('监听read' + rd.toString());
           readTime = DateTime.now().toString().substring(0,19);
           isConnect = true;
+          connectState(true);
+          List<int> list = rd.sublist(0,2);
+          int code = ByteTool.byte16(list.first,list.last);
+          debugPrint('code: $code');
+          LogsData logsData = LogsData(
+            code: 0,
+            logType: LogType.received,
+            time: DateTime.now(),
+            byteStr: intListToDisplayString(rd)
+          );
 
-          //调试日志接收数据存本地
-          if (isDebugPage) {
-            Map logMap = {'direction':'接收',
-                            'time':readTime,
-                            'byte':intListToDisplayString(rd),};
-            addDebugLogs(logMap);
-            String logStr = jsonEncode(logMap);
-            logList.add(logStr);
-            //saveStringList(ApiShare().dateLogName, logList);
-          }
+          LogsCache.getInstance().addLogs(logsData);
+
+          debugPrint('读取: ${logsData.toMap().toString()}');
+          debugPrint('报文数量: ${LogsCache.getInstance().logsList.length}');
+          debugPrint('发送数量: ${LogsCache.getInstance().sendLogsList.length}');
+          debugPrint('收到数量: ${LogsCache.getInstance().receivedLogsList.length}');
         }
          
       }else if(event == RawSocketEvent.write) {
         //连接的时候会进入
         debugPrint('write');
         isConnect = true;
+        connectState(true);
       }else if(event == RawSocketEvent.closed) {
         //手动输入断开
         debugPrint('closed');
         _socket?.close();
         isConnect = false;
+        connectState(false);
       }else if(event == RawSocketEvent.readClosed) {
         debugPrint('readClosed');
         isConnect = true;
+        connectState(true);
       }
     },
     onDone: (){
       print('onDone');
       isConnect = false;
+      connectState(false);
     },
     onError: (error){
       print(error);
       isConnect = false;
+      connectState(false);
     });
   }
 
-  
-
-  /// 调试日志数据
-  void addDebugLogs(Map log){
-    debugLogs.add(log);
-  }
 
   /// 发送
   Future<void> onTapSendBytes(List<int> buffer) async {
-    int? i = _socket?.write(buffer);
-    debugPrint('写时间:'+ DateTime.now().toString());
+    List<String> list = LogsCache.getInstance().codeList.toList();
+    int i = list.length > 0 ? int.parse(list.last) : 0;
+    
+    buffer[0] = ByteTool.high(i);
+    buffer[1] = ByteTool.low(i);
+
+    LogsData logsData = LogsData(
+      code: i+1,
+      logType: LogType.send,
+      time: DateTime.now(),
+      byteStr: intListToDisplayString(buffer)
+    );
+    LogsCache.getInstance().addLogs(logsData);
+    _socket?.write(buffer);
+    debugPrint('写入:'+ logsData.toMap().toString());
     // writeTime =  DateTime.now().toString().substring(0,19);
   }
 
@@ -128,6 +149,10 @@ String intListToDisplayString(List<int> bytes) {
     result += unit;
   }
   return result.trim().toUpperCase();
+}
+
+List<int> stringToDisplayIntList(String str){
+  return HEX.decode(str);
 }
 
 

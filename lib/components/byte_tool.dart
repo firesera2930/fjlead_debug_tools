@@ -26,7 +26,7 @@ class ByteTool {
   static int messageToData(List<int> message){
     Uint8List resultList = Uint8List.fromList(message);
     ByteData byteData = ByteData.view(resultList.buffer);
-    return byteData.getInt32(0);
+    return message.isNotEmpty ? byteData.getInt32(0) : 0;
   }
 
 }
