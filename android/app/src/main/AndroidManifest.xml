@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.debug_tools_wifi">
+    package="com.fjlead.wifitools">
 
     <!--访问网络-->
     <uses-permission android:name="android.permission.INTERNET" tools:ignore="ManifestOrder" />
@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />  
     
     <application
-        android:label="debug_tools_wifi"
+        android:label="力得调试工具"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

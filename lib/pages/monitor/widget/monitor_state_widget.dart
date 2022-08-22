@@ -46,7 +46,7 @@ class MonitorStateWidget extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        controller.sendMessage('');
+                        controller.sendMessage('00 00 00 00 00 06 68 03 00 00 00 56');
                       },
                       child: Container(
                         height: 32,

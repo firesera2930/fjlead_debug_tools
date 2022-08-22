@@ -1,4 +1,4 @@
-package com.example.debug_tools_wifi
+package com.fjlead.wifitools
 
 import io.flutter.embedding.android.FlutterActivity
 

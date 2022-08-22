@@ -14,7 +14,7 @@ class LogsCache{
   Set<LogsData> receivedLogsList = {};
 
   /// 序号列表
-  Set<String> codeList = {};
+  List<String> codeList = [];
 
 
   LogsCache._();
@@ -67,7 +67,7 @@ class LogsCache{
     logsList = {};
     sendLogsList = {};
     receivedLogsList = {};
-    codeList = {};
+    codeList = [];
 
     await prefs.setStringList('codeList', codeList.toList());
   }

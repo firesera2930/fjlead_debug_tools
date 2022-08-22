@@ -1,8 +1,6 @@
-import 'dart:math';
-
 import 'package:debug_tools_wifi/components/event_bird.dart';
 import 'package:debug_tools_wifi/components/public_tool.dart';
-import 'package:debug_tools_wifi/components/socket/logs_cache.dart';
+import 'package:debug_tools_wifi/cache/logs_cache.dart';
 import 'package:debug_tools_wifi/model/logs_data.dart';
 import 'package:debug_tools_wifi/pages/report/widget/report_list_widget.dart';
 import 'package:debug_tools_wifi/theme/theme.dart';

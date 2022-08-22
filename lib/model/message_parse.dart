@@ -2,9 +2,6 @@
 
 /// 下行报文
 class ClientMessage{
-
-  
-
 }
 
 /// 上行报文
@@ -63,5 +60,10 @@ MessageParse unitIdentifier = MessageParse(
 /// 字节数
 MessageParse byte = MessageParse(
   code: [104], 
+  length: 1
+);
+
+MessageParse functionCode = MessageParse(
+  code: [03],
   length: 1
 );

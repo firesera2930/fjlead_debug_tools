@@ -13,12 +13,14 @@ class ReportListWidget extends StatelessWidget {
 
     Size size = MediaQuery.of(context).size; 
     double width = size.width; 
+    List<LogsData> dataList = logsDataList.reversed.toList();
 
     return ListView.builder(
-      itemCount: logsDataList.length,
+      reverse: true, 
+      itemCount: dataList.length,
       itemBuilder: (BuildContext context, int i){
         return itemWidget(
-          logsData: logsDataList[i],
+          logsData: dataList[i],
           width: width
         );
       }

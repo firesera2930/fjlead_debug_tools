@@ -76,15 +76,8 @@ class MonitorData{
 
 }
 
-/// 监测类型
-enum MonitorType{
-  dischargeGate,      // 0 泄流闸
-  dischargePipe,      // 1 泄流管道
-  dischargeChannel,   // 2 泄流明渠
-  generatorPower,     // 3 发电机功率
-  measuringWeir,      // 4 量水堰
-  drainHole           // 5 泄水孔
-}
+
+
 
 /// 监测类型
 Map<int, String> monitorType = {
@@ -100,353 +93,309 @@ Map<int, String> monitorType = {
 /// 基础信息
 List<RegisterData> _basicData = [
   RegisterData(
-    registerAddress: 0x0000,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x00,
     content: '监测点数量',
-    length: 4,
-    instructions: '',
-    multiple: 1,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0002,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x02,
     content: '核定流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0004,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x04,
     content: '瞬时总流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
 ];
 
 /// 监测点一
 List<RegisterData> _monitorOne = [
   RegisterData(
-    registerAddress: 0x0006,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x06,
     content: '监测点1监测类型',
-    length: 4,
     instructions: '0～5对应6种监测类型：泄流闸、泄流管道、泄流明渠、发电机功率、量水堰、泄水孔，显示类型名称，不是显示数字。',
-    multiple: 1,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0008,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x08,
     content: '监测点1流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x000A,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x0A,
     content: '监测点1水位1',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x000C,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x0C,
     content: '监测点1水位2',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x000E,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x0E,
     content: '监测点1开度',
-    length: 4,
     instructions: '监测点1监测类型为泄流闸时,APP界面才显示开度',
     multiple: 1000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0010,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x10,
     content: '监测点1功率',
-    length: 4,
     instructions: '监测点1监测类型为发电机功率时,APP界面才显示功率',
     multiple: 10,
-    value: []
   ),
 ];
 
 /// 监测点二
 List<RegisterData> _monitorTwo = [
   RegisterData(
-    registerAddress: 0x0012,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x12,
     content: '监测点2监测类型',
-    length: 4,
     instructions: '0～5对应6种监测类型：泄流闸、泄流管道、泄流明渠、发电机功率、量水堰、泄水孔，显示类型名称，不是显示数字。',
-    multiple: 1,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0014,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x14,
     content: '监测点2流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0016,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x16,
     content: '监测点2水位1',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0018,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x18,
     content: '监测点2水位2',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x001A,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x1A,
     content: '监测点2开度',
-    length: 4,
     instructions: '监测点2监测类型为泄流闸时,APP界面才显示开度',
     multiple: 1000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x001C,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x1C,
     content: '监测点2功率',
-    length: 4,
     instructions: '监测点2监测类型为发电机功率时,APP界面才显示功率',
     multiple: 10,
-    value: []
   ),
 ];
 
 /// 监测点三
 List<RegisterData> _monitorThree = [
   RegisterData(
-    registerAddress: 0x001E,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x1E,
     content: '监测点3监测类型',
-    length: 4,
     instructions: '0～5对应6种监测类型：泄流闸、泄流管道、泄流明渠、发电机功率、量水堰、泄水孔，显示类型名称，不是显示数字。',
-    multiple: 1,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0020,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x20,
     content: '监测点3流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0022,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x22,
     content: '监测点3水位1',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0024,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x24,
     content: '监测点3水位2',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0026,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x26,
     content: '监测点3开度',
-    length: 4,
     instructions: '监测点3监测类型为泄流闸时,APP界面才显示开度',
     multiple: 1000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0028,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x28,
     content: '监测点3功率',
-    length: 4,
     instructions: '监测点3监测类型为发电机功率时,APP界面才显示功率',
     multiple: 10,
-    value: []
   ),
 ];
 
 /// 监测点四
 List<RegisterData> _monitorFour = [
   RegisterData(
-    registerAddress: 0x002A,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x2A,
     content: '监测点4监测类型',
-    length: 4,
     instructions: '0～5对应6种监测类型：泄流闸、泄流管道、泄流明渠、发电机功率、量水堰、泄水孔，显示类型名称，不是显示数字。',
-    multiple: 1,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x002C,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x2C,
     content: '监测点4流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x002E,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x2E,
     content: '监测点4水位1',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0030,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x30,
     content: '监测点4水位2',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: [] 
   ),
   RegisterData(
-    registerAddress: 0x0032,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x32,
     content: '监测点4开度',
-    length: 4,
     instructions: '监测点4监测类型为泄流闸时,APP界面才显示开度',
     multiple: 1000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0034,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x34,
     content: '监测点4功率',
-    length: 4,
     instructions: '监测点4监测类型为发电机功率时,APP界面才显示功率',
     multiple: 10,
-    value: []
   ),
 ];
 
 /// 监测点五
 List<RegisterData> _monitorFive = [
   RegisterData(
-    registerAddress: 0x0036,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x36,
     content: '监测点5监测类型',
-    length: 4,
     instructions: '0～5对应6种监测类型：泄流闸、泄流管道、泄流明渠、发电机功率、量水堰、泄水孔，显示类型名称，不是显示数字。',
-    multiple: 1,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0038,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x38,
     content: '监测点5流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x003A,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x3A,
     content: '监测点5水位1',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x003C,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x3C,
     content: '监测点5水位2',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x003E,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x3E,
     content: '监测点5开度',
-    length: 4,
     instructions: '监测点5监测类型为泄流闸时,APP界面才显示开度',
     multiple: 1000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0040,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x40,
     content: '监测点5功率',
-    length: 4,
     instructions: '监测点5监测类型为发电机功率时,APP界面才显示功率',
     multiple: 10,
-    value: []
   ),
 ];
 
 /// 监测点六
 List<RegisterData> _monitorSix = [
   RegisterData(
-    registerAddress: 0x0042,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x42,
     content: '监测点6监测类型',
-    length: 4,
     instructions: '0～5对应6种监测类型：泄流闸、泄流管道、泄流明渠、发电机功率、量水堰、泄水孔，显示类型名称，不是显示数字。',
-    multiple: 1,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0044,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x44,
     content: '监测点6流量',
-    length: 4,
     instructions: '4位小数(数据放大10000倍)，单位： m3/s',
     multiple: 10000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0046,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x46,
     content: '监测点6水位1',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x0048,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x48,
     content: '监测点6水位2',
-    length: 4,
     instructions: '2位小数(数据放大100倍)，单位： m',
     multiple: 100,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x004A,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x4A,
     content: '监测点6开度',
-    length: 4,
     instructions: '监测点6监测类型为泄流闸时,APP界面才显示开度',
     multiple: 1000,
-    value: []
   ),
   RegisterData(
-    registerAddress: 0x004C,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x4C,
     content: '监测点6功率',
-    length: 4,
     instructions: '监测点6监测类型为发电机功率时,APP界面才显示功率',
     multiple: 10,
-    value: []
   ),
 ];
 
 /// 尾信息
 List<RegisterData> _tailData = [
   RegisterData(
-    registerAddress: 0x004E,
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x4E,
     content: '终端软件版本号',
     length: 16,
-    instructions: '',
-    multiple: 1,
-    value: []
+    isASCII: true
   ),
 ];
 
+/// 
+void typeChange(){
+
+}
 

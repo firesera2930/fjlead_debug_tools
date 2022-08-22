@@ -1,4 +1,4 @@
-import 'package:debug_tools_wifi/components/socket/logs_cache.dart';
+import 'package:debug_tools_wifi/cache/logs_cache.dart';
 import 'package:debug_tools_wifi/pages/mine/page/mine_page.dart';
 import 'package:debug_tools_wifi/pages/workbench/page/workbench_page.dart';
 import 'package:debug_tools_wifi/theme/theme.dart';
