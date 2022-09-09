@@ -133,7 +133,7 @@ class MonitorController extends GetxController{
   void getList(){
     if(monitorNum.value > 0){
       for(int i = 0; i < monitorNum.value; i++){
-        switch (monitorNum.value) {
+        switch (i+1) {
           case 1:
             registerData.add(monitorData.value.monitorOne);
             break;
