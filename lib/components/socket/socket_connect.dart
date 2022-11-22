@@ -119,9 +119,9 @@ class SocketConnect {
   Future<void> onTapSendBytes(List<int> buffer) async {
     List<String> list = LogsCache.getInstance().codeList.toList();
     int i = list.length > 0 ? int.parse(list.last) : 0;
-    
-    buffer[0] = ByteTool.high(i);
-    buffer[1] = ByteTool.low(i);
+
+    // buffer[0] = ByteTool.high(i);
+    // buffer[1] = ByteTool.low(i);
 
     LogsData logsData = LogsData(
       code: i+1,
@@ -140,7 +140,7 @@ class SocketConnect {
     List<int>? uint8List = _socket?.read();
     debugPrint('读时间:'+ DateTime.now().toString());
     String str = HEX.encode(uint8List ?? []);
-    debugPrint(str);
+    debugPrint('onTapReceiveBytes'+ str);
     // writeTime =  DateTime.now().toString().substring(0,19);
   }
 
@@ -150,13 +150,30 @@ String intListToDisplayString(List<int> bytes) {
   var result = '';
   for(int i = 0 ; i < bytes.length ; i++) {
     var unit = HEX.encode(bytes.sublist(i,i+1));
+    String hex = bytes[i].toStringAsFixed(16);
     unit += ' ';
     result += unit;
   }
   return result.trim().toUpperCase();
+
+  // var result = '';
+  // for(int i = 0 ; i < bytes.length ; i++) {
+  //
+  //   String hex = bytes[i].toRadixString(16);
+  //   hex.length == 1 ? hex = '0$hex' : hex = hex;
+  //   result.length == 0 ? result = hex : result = result +' ' + hex;
+  // }
+  // return result.trim().toUpperCase();
 }
 
 List<int> stringToDisplayIntList(String str){
+  // List allS = str.split(' ');
+  // List<int> hexBytes = [];
+  // allS.forEach((element) {
+  //   int? hex = ByteTool.hexToInt2(element);
+  //   hexBytes.add(hex!);
+  // });
+  // return hexBytes;
   return HEX.decode(str);
 }
 

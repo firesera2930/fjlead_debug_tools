@@ -10,6 +10,7 @@ class MonitorData{
   List<RegisterData> monitorFive = [];
   List<RegisterData> monitorSix = [];
   List<RegisterData> tailData = [];
+  List<RegisterData> monitorFlow = [];
   List<RegisterData> data = [];
 
   MonitorData({
@@ -21,6 +22,7 @@ class MonitorData{
     this.monitorFive = const <RegisterData>[],
     this.monitorSix = const <RegisterData>[],
     this.tailData = const <RegisterData>[],
+    this.monitorFlow = const <RegisterData>[],
     this.data = const <RegisterData>[],
   });
 
@@ -34,6 +36,8 @@ class MonitorData{
     list.addAll(_monitorFive);
     list.addAll(_monitorSix);
     list.addAll(_tailData);
+    list.addAll(_monitorFlowDotData);
+
     return MonitorData(
       basicData: _basicData,
       monitorOne: _monitorOne,
@@ -43,6 +47,7 @@ class MonitorData{
       monitorFive: _monitorFive,
       monitorSix: _monitorSix,
       tailData: _tailData,
+        monitorFlow: _monitorFlowDotData,
       data: list
     );
   } 
@@ -52,11 +57,12 @@ class MonitorData{
     newData = monitorData;
     for(int i = 0; i < monitorData.data.length; i++ ){
       List<int> list = [];
-      if(i == monitorData.data.length - 1){
-        list = data.sublist(i*4);
-      }else{
-        list = data.sublist(i*4, (i+1)*4);
-      }
+      // if(i == monitorData.data.length - 1){
+      //   list = data.sublist(i*4);
+      // }else{
+      //   list = data.sublist(i*4, (i+1)*4);
+      // }
+      list = data.sublist(i*4, (i+1)*4);
       newData.data[i].value = list;
     }
     return newData;
@@ -388,9 +394,84 @@ List<RegisterData> _tailData = [
   RegisterData(
     registerAddressHigh: 0x00,
     registerAddressLow: 0x4E,
-    content: '终端软件版本号',
-    length: 16,
-    isASCII: true
+    content: '外设用串口',
+    length: 4,
+  ),
+];
+
+/// 尾信息
+List<RegisterData> _monitorFlowDotData = [
+  RegisterData(
+      registerAddressHigh: 0x00,
+      registerAddressLow: 0x50,
+      content: '监测点1水位1点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x52,
+    content: '监测点1水位2点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x54,
+    content: '监测点2水位1点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x56,
+    content: '监测点2水位2点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x58,
+    content: '监测点3水位1点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x5A,
+    content: '监测点3水位2点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x5C,
+    content: '监测点4水位1点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x5E,
+    content: '监测点4水位2点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x60,
+    content: '监测点5水位1点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x62,
+    content: '监测点5水位2点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x64,
+    content: '监测点6水位1点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
+  ),
+  RegisterData(
+    registerAddressHigh: 0x00,
+    registerAddressLow: 0x66,
+    content: '监测点6水位2点号',
+    instructions: '0～5对应“数据点号1～数据点号6 6：未启用',
   ),
 ];
 

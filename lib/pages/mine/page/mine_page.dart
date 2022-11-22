@@ -1,3 +1,6 @@
+import 'package:debug_tools_wifi/app/app_config.dart';
+import 'package:debug_tools_wifi/pages/mine/page/instrument_page.dart';
+import 'package:debug_tools_wifi/pages/mine/page/setting_page.dart';
 import 'package:debug_tools_wifi/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +15,28 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
+
+  String displayBuild = '';
+  String displayVersion = '';
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  /// 初始化数据
+  void initData(){
+    displayBuild = AppConfig.getInstance().displayBuild;
+    displayVersion = AppConfig.getInstance().displayVersion;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return ThemeGradientBackground(
@@ -27,12 +52,12 @@ class _MinePageState extends State<MinePage> {
                   functionItem(
                     icon: Icon(Icons.settings, size: 36),
                     text: '应用设置',
-                    nextPage: Container()
+                    nextPage: SettingPage()
                   ),
                   functionItem(
                     icon: Icon(Icons.info_outline, size: 36),
                     text: '关于',
-                    nextPage: Container()
+                    nextPage: InstrumentPage()
                   )
                 ],
               )
@@ -60,13 +85,13 @@ class _MinePageState extends State<MinePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text('V1.0.0',style: TextStyle(fontSize: 12)),
+                Text(displayVersion, style: TextStyle(fontSize: 12)),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text('Build 20220727',style: TextStyle(fontSize: 12)),
+                Text(displayBuild, style: TextStyle(fontSize: 12)),
               ],
             ),
             Container(height: 10),

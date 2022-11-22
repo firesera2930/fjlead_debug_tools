@@ -57,16 +57,16 @@ class DeviceCache {
     }else if (Platform.isAndroid){
 
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      log += '设备类型: ' + ((androidInfo.isPhysicalDevice ?? false) ? '真机' :'模拟器') + '\n';
+      log += '设备类型: ' + (androidInfo.isPhysicalDevice ? '真机' :'模拟器') + '\n';
       log += '操作系统: Android\n';
-      log += '系统版本: ' + (androidInfo.version.release ?? '') + '\n';
-      log += '设备机型: ' + (androidInfo.model ?? '')+ '\n';
+      log += '系统版本: ' + androidInfo.version.release + '\n';
+      log += '设备机型: ' + androidInfo.model + '\n';
 
       DeviceCache.getInstance().systemTitle = 'Android';
       DeviceCache.getInstance().systemType = SystemType.mobile;
-      DeviceCache.getInstance().systemVersion = androidInfo.version.release ?? '';
-      DeviceCache.getInstance().deviceEquipmentModel = androidInfo.model ?? '';
-      DeviceCache.getInstance().isSimulator = !(androidInfo.isPhysicalDevice ?? true);
+      DeviceCache.getInstance().systemVersion = androidInfo.version.release;
+      DeviceCache.getInstance().deviceEquipmentModel = androidInfo.model;
+      DeviceCache.getInstance().isSimulator = !androidInfo.isPhysicalDevice;
       if(DeviceCache.getInstance().isSimulator) DeviceCache.getInstance().deviceEquipmentModel = '模拟器';
       debugPrint(log);
     }else if(Platform.isMacOS){

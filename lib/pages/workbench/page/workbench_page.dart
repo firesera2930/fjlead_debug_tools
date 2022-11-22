@@ -31,7 +31,7 @@ class _WorkbenchPageState extends State<WorkbenchPage> {
                 children: [
                   functionItem(
                     icon: Icon(Icons.data_thresholding, size: 36),
-                    text: '实时监测数据',
+                    text: '生态终端 FMD51',
                     nextPage: ReportRootPage()
                   )
                 ],

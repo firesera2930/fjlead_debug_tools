@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 /// 记录数据
 class LogsData{
 

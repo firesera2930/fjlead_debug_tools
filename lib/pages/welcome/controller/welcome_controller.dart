@@ -45,7 +45,7 @@ class WelcomeController extends GetxController{
 
   /// 展示版本号
   void showVersions() async {
-    displayVersion('V' + AppConfig.getInstance().displayVersion);
+    displayVersion(AppConfig.getInstance().displayVersion);
     displayBuild(AppConfig.getInstance().displayBuild);
     update();
   }

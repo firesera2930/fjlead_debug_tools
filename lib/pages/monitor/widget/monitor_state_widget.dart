@@ -1,3 +1,4 @@
+import 'package:debug_tools_wifi/components/data_tool.dart';
 import 'package:debug_tools_wifi/pages/monitor/controller/monitor_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,10 @@ class MonitorStateWidget extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        controller.sendMessage('00 00 00 00 00 06 68 03 00 00 00 56');
+                        // controller.sendMessage('00 00 00 00 00 06 68 03 00 00 00 56');
+                        String string1 = DataTool.sendGetMessageData('00', '00', 208);
+                        print(string1);
+                        controller.sendMessage(string1);
                       },
                       child: Container(
                         height: 32,

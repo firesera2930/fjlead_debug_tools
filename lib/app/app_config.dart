@@ -1,7 +1,7 @@
 class AppConfig{
 
-  String displayVersion = '1.0.0';
-  String displayBuild = 'build 20220701';
+  String displayVersion = 'V1.1.0';
+  String displayBuild = 'Build 20221122';
 
   String baseIP = '192.168.8.1';
   int basePort = 8080;

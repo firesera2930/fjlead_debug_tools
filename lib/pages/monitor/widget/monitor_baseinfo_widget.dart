@@ -1,5 +1,5 @@
 import 'package:debug_tools_wifi/components/byte_tool.dart';
-import 'package:debug_tools_wifi/model/monitor_data.dart';
+import 'package:debug_tools_wifi/pages/monitor/model/monitor_data.dart';
 import 'package:debug_tools_wifi/pages/monitor/controller/monitor_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,13 +28,13 @@ class MonitorBaseInfoWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('终端软件版本号', style: TextStyle(fontSize: 16)),
-                    Text(controller.version.value, style: TextStyle(fontSize: 16)),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text('终端软件版本号', style: TextStyle(fontSize: 16)),
+                //     // Text(controller.version.value, style: TextStyle(fontSize: 16)),
+                //   ],
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
